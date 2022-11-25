@@ -1,19 +1,23 @@
 [![](https://jitpack.io/v/theakashdev/KotlinX.svg)](https://jitpack.io/#theakashdev/KotlinX)
 
 
-```
-//in the build.gradle(project level)
+add it to your settings.gradle file
 
-allprojects {
+```gradle
+dependencyResolutionManagement {
+    ....
     repositories {
         ...
         maven { url 'https://jitpack.io' }
     }
 }
+```
 
+add it to your build.gradle(Module: app) file
+
+```gradle
 dependencies {
-    ....
-    implementation "com.github.theakashdev:KotlinX:$lastest_version"
+    implementation 'com.github.theakashdev:KotlinX:{latest version}'
 }
 
 ```
