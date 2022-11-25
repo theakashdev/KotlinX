@@ -1,7 +1,8 @@
+[![](https://jitpack.io/v/theakashdev/KotlinX.svg)](https://jitpack.io/#theakashdev/KotlinX)
 
 
 ```
-build.gradle(project level)
+//in the build.gradle(project level)
 
 allprojects {
     repositories {
@@ -10,9 +11,10 @@ allprojects {
     }
 }
 
-implementation "com.github.theakashdev:KotlinX:$lastest_version"
+dependencies {
+    ....
+    implementation "com.github.theakashdev:KotlinX:$lastest_version"
+}
 
 ```
-
-[![](https://jitpack.io/v/theakashdev/KotlinX.svg)](https://jitpack.io/#theakashdev/KotlinX)
 
