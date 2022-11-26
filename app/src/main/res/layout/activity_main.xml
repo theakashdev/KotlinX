@@ -17,14 +17,15 @@
 
     <com.akashdev.kotlinx.XProgressBar
         android:id="@+id/progress"
+        android:background="@color/x_progress_bar_bg_color"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:elevation="10dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:isVisibleLoadingText="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:loadingText="Wait..." />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
