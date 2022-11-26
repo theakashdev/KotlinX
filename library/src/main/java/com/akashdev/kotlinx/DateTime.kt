@@ -26,8 +26,8 @@ fun convertMinutesToHrMin(timeInMinutes: Int, context: Context): String {
     if (DateFormat.is24HourFormat(context)) return time
     return runCatching {
         val sdf = SimpleDateFormat("H:mm", Locale.getDefault())
-        val dateObj: Date = sdf.parse(time)
-        SimpleDateFormat("hh:mma", Locale.getDefault()).format(dateObj)
+        val dateObj: Date? = sdf.parse(time)
+        SimpleDateFormat("hh:mma", Locale.getDefault()).format(dateObj!!)
     }.getOrDefault(time)
 }
 

@@ -1,0 +1,8 @@
+<resources>
+    <declare-styleable name="XProgressBar">
+        <attr name="isVisible" format="boolean" />
+        <attr name="backgroundColor" format="color" />
+        <attr name="isVisibleLoadingText" format="boolean" />
+        <attr name="loadingText" format="string" localization="suggested" />
+    </declare-styleable>
+</resources>

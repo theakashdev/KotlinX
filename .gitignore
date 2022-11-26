@@ -1,2 +1,14 @@
 # Project exclude paths
-/.gradle/
+*.iml
+.gradle
+build.zip
+local.zip
+/.idea
+/app/release
+/app/google-services.json
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
