@@ -24,16 +24,21 @@ class XProgressBar @JvmOverloads constructor(
 
             try {
                 //loading text
-                binding.textLoading.text = typedArray.getString(
-                    /* index = */
-                    R.styleable.XProgressBar_loadingText,
-                ) /* defValue = */ ?: "Loading..."
+                binding.textLoading.text =
+                    typedArray.getString(R.styleable.XProgressBar_loadingText) ?: "Loading..."
 
                 //visibility of loading text
-                binding.textLoading.isVisible = typedArray.getBoolean(
-                    /* index = */ R.styleable.XProgressBar_isVisibleLoadingText,
-                    /* defValue = */ true
+                binding.textLoading.isVisible =
+                    typedArray.getBoolean(R.styleable.XProgressBar_isVisibleLoadingText, true)
+
+                //loading text color
+                binding.textLoading.setTextColor(
+                    typedArray.getColor(
+                        R.styleable.XProgressBar_loadingTextColor,
+                        context.getColor(R.color.white)
+                    )
                 )
+
             } finally {
                 typedArray.recycle()
             }
@@ -50,6 +55,15 @@ class XProgressBar @JvmOverloads constructor(
         get() = typedArray.getBoolean(R.styleable.XProgressBar_loadingText, false)
         set(value) {
             binding.textLoading.isVisible = value
+        }
+
+    var loadingTextColor
+        get() = typedArray.getColor(
+            R.styleable.XProgressBar_loadingTextColor,
+            context.getColor(R.color.white)
+        )
+        set(value) {
+            binding.textLoading.setTextColor(value)
         }
 
 }

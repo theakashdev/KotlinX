@@ -2,5 +2,6 @@
     <declare-styleable name="XProgressBar">
         <attr name="loadingText" format="string" localization="suggested" />
         <attr name="isVisibleLoadingText" format="boolean" />
+        <attr name="loadingTextColor" format="color" />
     </declare-styleable>
 </resources>
