@@ -27,19 +27,6 @@ fun Context.defaultCallingApp(): String? {
     return resolveInfo?.activityInfo?.packageName
 }
 
-fun Context.getAllAppPackages(category: String? = Intent.CATEGORY_LAUNCHER): MutableList<ResolveInfo> {
-    val intent = Intent(Intent.ACTION_MAIN).apply { addCategory(category) }
-    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-        packageManager.queryIntentActivities(
-            intent,
-            PackageManager.ResolveInfoFlags.of(PackageManager.MATCH_DEFAULT_ONLY.toLong())
-        )
-    } else {
-        @Suppress("DEPRECATION")
-        packageManager.queryIntentActivities(intent, 0)
-    }
-}
-
 fun Context.defaultLauncherApp(): String? {
     val intent = Intent(Intent.ACTION_MAIN).apply { addCategory(Intent.CATEGORY_HOME) }
     val resolveInfo = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -52,6 +39,19 @@ fun Context.defaultLauncherApp(): String? {
         packageManager.resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY)
     }
     return resolveInfo?.activityInfo?.packageName
+}
+
+fun Context.getAllAppPackages(category: String? = Intent.CATEGORY_LAUNCHER): MutableList<ResolveInfo> {
+    val intent = Intent(Intent.ACTION_MAIN).apply { addCategory(category) }
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        packageManager.queryIntentActivities(
+            intent,
+            PackageManager.ResolveInfoFlags.of(PackageManager.MATCH_ALL.toLong())
+        )
+    } else {
+        @Suppress("DEPRECATION")
+        packageManager.queryIntentActivities(intent, 0)
+    }
 }
 
 fun Context.getAppNameByPackage(pkgName: CharSequence): String? = runCatching {
@@ -91,7 +91,7 @@ fun Context.getInstallBrowsersList(): List<String> = runCatching {
     val browserList = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
         packageManager.queryIntentActivities(
             intent,
-            PackageManager.ResolveInfoFlags.of(PackageManager.MATCH_DEFAULT_ONLY.toLong())
+            PackageManager.ResolveInfoFlags.of(PackageManager.MATCH_ALL.toLong())
         )
     } else {
         @Suppress("DEPRECATION")
@@ -107,7 +107,7 @@ fun Context.isPackageInstalled(packageName: CharSequence) = runCatching {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
         packageManager.getPackageInfo(
             "$packageName",
-            PackageManager.PackageInfoFlags.of(PackageManager.MATCH_DEFAULT_ONLY.toLong())
+            PackageManager.PackageInfoFlags.of(PackageManager.MATCH_ALL.toLong())
         )
     } else {
         @Suppress("DEPRECATION")
@@ -120,7 +120,7 @@ fun Context.isSystemApp(packageName: CharSequence) = runCatching {
     val info = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
         packageManager.getApplicationInfo(
             "$packageName",
-            PackageManager.ApplicationInfoFlags.of(PackageManager.MATCH_DEFAULT_ONLY.toLong())
+            PackageManager.ApplicationInfoFlags.of(PackageManager.MATCH_ALL.toLong())
         )
     } else {
         @Suppress("DEPRECATION")
@@ -134,12 +134,12 @@ fun Context.isNewlyInstallApp(packageName: CharSequence): Boolean {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             val firstInstallTime = packageManager.getPackageInfo(
                 "$packageName",
-                PackageManager.PackageInfoFlags.of(PackageManager.MATCH_DEFAULT_ONLY.toLong())
+                PackageManager.PackageInfoFlags.of(PackageManager.MATCH_ALL.toLong())
             ).firstInstallTime
 
             val lastUpdateTime = packageManager.getPackageInfo(
                 "$packageName",
-                PackageManager.PackageInfoFlags.of(PackageManager.MATCH_DEFAULT_ONLY.toLong())
+                PackageManager.PackageInfoFlags.of(PackageManager.MATCH_ALL.toLong())
             ).lastUpdateTime
 
             firstInstallTime == lastUpdateTime
