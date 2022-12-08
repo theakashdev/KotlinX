@@ -1,8 +1,6 @@
 package com.akashdev.kotlinx
 
-import android.content.Context
 import android.content.res.Resources
-import android.os.Build
 import android.util.TypedValue
 import com.google.gson.Gson
 import kotlin.math.roundToInt
@@ -33,15 +31,5 @@ inline fun <reified T> jsonStringToObject(jsonString: String): T {
 }
 
 val <T : Any> T.TAG get() = this::class.simpleName
-
-
-fun getInstallerPackageName(context: Context, packageName: String): String? {
-    return runCatching {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
-            return context.packageManager.getInstallSourceInfo(packageName).installingPackageName
-        @Suppress("DEPRECATION")
-        context.packageManager.getInstallerPackageName(packageName)
-    }.getOrNull()
-}
 
 val dialogTag = "Dialog${Random.nextInt()}"

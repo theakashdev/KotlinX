@@ -20,10 +20,11 @@ fun Context.showPushNotification(
     buttonName: String? = null,
     smallIcon: Int? = null,
     smallIconColor: Int? = null,
+    channelId: String? = "channel_id"
 ) {
     val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-    val notification = NotificationCompat.Builder(this, "channel_id").apply {
+    val notification = NotificationCompat.Builder(this, channelId!!).apply {
         setContentTitle(title)
         setContentText(body)
         smallIcon?.let { setSmallIcon(it) }
@@ -44,7 +45,7 @@ fun Context.showPushNotification(
     // Since android Oreo notification channel is needed.
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
         val channel =
-            NotificationChannel("channel_id", "channelName", NotificationManager.IMPORTANCE_DEFAULT)
+            NotificationChannel(channelId, "channelName", NotificationManager.IMPORTANCE_DEFAULT)
         notificationManager.createNotificationChannel(channel)
     }
     //show the notification

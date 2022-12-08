@@ -77,7 +77,7 @@ fun Fragment.toast(text: CharSequence) = requireContext().toast(text)
 fun Fragment.toast(resId: Int) = requireContext().toast(getString(resId))
 fun Fragment.copyToClipboard(text: String, label: String = "") = context?.copyToClipboard(text, label)
 
-fun Fragment.share(message: String, appId: String? = null) = context?.share(message, appId)
+fun Fragment.shareText(message: String, appId: String? = null) = context?.shareText(message, appId)
 
 fun Fragment.isPackageInstalled(packageName: CharSequence) =
     context?.isPackageInstalled(packageName)

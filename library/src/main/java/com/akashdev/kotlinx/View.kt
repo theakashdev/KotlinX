@@ -6,15 +6,6 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.snackbar.Snackbar
 
-val ChipGroup.checkedChipText: String?
-    get() = findViewById<Chip>(checkedChipId)?.text?.toString()
-
-val ChipGroup.checkedChipTag: String?
-    get() = findViewById<Chip>(checkedChipId)?.tag?.toString()
-
-val ChipGroup.checkedChip: Chip?
-    get() = findViewById<Chip>(checkedChipId)
-
 // View Visible
 fun View.show() {
     if (!isVisible) visibility = View.VISIBLE
