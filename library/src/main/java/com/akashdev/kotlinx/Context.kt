@@ -50,7 +50,6 @@ fun Context.toast(text: String, length: Int? = Toast.LENGTH_LONG) =
 
 fun Context.toast(resId: Int, length: Int? = Toast.LENGTH_LONG) = toast(getString(resId), length!!)
 
-
 //Open URL
 fun Context.openURL(url: String, flags: Int? = null) {
     runCatching {

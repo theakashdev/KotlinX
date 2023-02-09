@@ -22,7 +22,7 @@ fun Long.millisToDaysDouble(): Double {
 }
 
 fun convertMinutesToHrMin(timeInMinutes: Int, context: Context): String {
-    val time = timeInMinutes.minToMillis().toHrMin()
+    val time = timeInMinutes.minToMillis().millisToHrMin()
     if (DateFormat.is24HourFormat(context)) return time
     return runCatching {
         val sdf = SimpleDateFormat("H:mm", Locale.getDefault())
@@ -60,17 +60,17 @@ fun tomorrowDate(
 }
 
 
-fun currentMillis() = System.currentTimeMillis()
+fun currentMillis(): Long = System.currentTimeMillis()
 
-fun Int.minToMillis() = TimeUnit.MINUTES.toMillis(this.toLong())
-fun Int.hrToMillis() = TimeUnit.HOURS.toMillis(this.toLong())
-fun Int.secToMillis() = TimeUnit.SECONDS.toMillis(this.toLong())
-fun Int.daysToMillis() = TimeUnit.DAYS.toMillis(this.toLong())
+fun Int.secToMillis(): Long = TimeUnit.SECONDS.toMillis(this.toLong())
+fun Int.minToMillis(): Long = TimeUnit.MINUTES.toMillis(this.toLong())
+fun Int.hrToMillis(): Long = TimeUnit.HOURS.toMillis(this.toLong())
+fun Int.daysToMillis(): Long = TimeUnit.DAYS.toMillis(this.toLong())
 
-fun Long.millisToSec() = TimeUnit.MILLISECONDS.toSeconds(this)
-fun Long.millisToMin() = TimeUnit.MILLISECONDS.toMinutes(this)
-fun Long.millisToHr() = TimeUnit.MILLISECONDS.toHours(this)
-fun Long.millisToDays() = (this / 8.64e+7).roundToInt()//found in google
+fun Long.millisToSec(): Long = TimeUnit.MILLISECONDS.toSeconds(this)
+fun Long.millisToMin(): Long = TimeUnit.MILLISECONDS.toMinutes(this)
+fun Long.millisToHr(): Long = TimeUnit.MILLISECONDS.toHours(this)
+fun Long.millisToDays(): Int = (this / 8.64e+7).roundToInt()//found in google
 
 fun diffInDates(
     startDate: String = "2021-04-20 12:30:50",
@@ -102,7 +102,7 @@ fun Long.millisToHumanDateTime(
 }
 
 
-fun Long.toDaysHrMinSec() = String.format(
+fun Long.millisToDaysHrMinSec(): String = String.format(
     "%02d:%02d:%02d:%02d",
     TimeUnit.MILLISECONDS.toDays(this) % 24,
     TimeUnit.MILLISECONDS.toHours(this) % 60,
@@ -110,20 +110,20 @@ fun Long.toDaysHrMinSec() = String.format(
     TimeUnit.MILLISECONDS.toSeconds(this) % 60
 )
 
-fun Long.toHrMinSec() = String.format(
+fun Long.millisToHrMinSec(): String = String.format(
     "%02d:%02d:%02d",
     TimeUnit.MILLISECONDS.toHours(this) % 60,
     TimeUnit.MILLISECONDS.toMinutes(this) % 60,
     TimeUnit.MILLISECONDS.toSeconds(this) % 60
 )
 
-fun Long.toHrMin() = String.format(
+fun Long.millisToHrMin(): String = String.format(
     "%02d:%02d",
     TimeUnit.MILLISECONDS.toHours(this) % 60,
     TimeUnit.MILLISECONDS.toMinutes(this) % 60,
 )
 
-fun Long.toMinSec() = String.format(
+fun Long.millisToMinSec(): String = String.format(
     "%02d:%02d",
     TimeUnit.MILLISECONDS.toMinutes(this) % 60,
     TimeUnit.MILLISECONDS.toSeconds(this) % 60
